@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Dashboard -->
+<section class="dashboard" id="dashboard">
+    <div class="container">
+        <div class="dashboard-header">
+            <h2 class="dashboard-title">Doctor Dashboard</h2>
+            <div>
+                <span id="currentDate"></span>
+            </div>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+            <a href="#patientsQueue" class="btn btn-primary">Patients Queue</a>
+            <a href="#prescription" class="btn btn-primary">Prescription</a>
+            <a href="#patientHistory" class="btn btn-primary">Patient Histroy</a>
+            <a href="#appointments" class="btn btn-primary">Appointments</a>
+            <a href="{{url_for('home')}}" class="btn btn-primary">Logout</a>
+        </div>
+    </div>
+</section>
+
+<!--Patients Queue-->
+<section class="section-padding" id="patientsQueue">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title">Current patients Queue</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Condition</th>
+                            <th>Date Added</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patient in patients %}
+                        <tr>
+                            <td>{{ patient['token'] }}</td>
+                            <td>{{ patient['name'] }}</td>
+                            <td>{{ patient['age'] }}</td>
+                            <td>{{ patient['condition'] }}</td>
+                            <td>{{ patient['date_added'] }}</td>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">No Patients added yet</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Prescriptions-->
+<section class="section-padding" id="prescription">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title">Add Prescription</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="booking-form">
+                    <form action="{{ url_for('add_prescription') }}" method="POST">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="patient select">Select patient</label>
+                                <select class="form-control" name="patient_id" required>
+                                    <option value="">Select a patient</option>
+                                    {% for patient in patients %}
+                                    <option value="{{ patient.id }}">{{ patient.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="Diagnosis" class="form-label">Diagnosis</label>
+                                <textarea class="form-control" name="diagnosis" rows="1" placeholder="Enter Diagnosis"
+                                    required></textarea>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="medication" class="form-label">Medication</label>
+                                <textarea class="form-control" name="medication" rows="1"
+                                    placeholder="Enter Medication Details" required></textarea>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="instructions" class="form-label">Instructions</label>
+                                <textarea class="form-control" name="instructions" rows="1"
+                                    placeholder="Enter Instructions for Patient" required></textarea>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary">Save Prescription</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Patient History-->
+<section id="patientHistory" class="section-padding">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title">Patient History</h2>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Diagnosis</th>
+                        <th>Prescription</th>
+                        <th>Instructions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in prescriptions %}
+                    <tr>
+                        <td>{{ record['date_added'] }}</td>
+                        <td>{{ record['patient_name'] }}</td>
+                        <td>{{ record['age'] }}</td>
+                        <td>{{ record['diagnosis'] }}</td>
+                        <td>{{ record['medication'] }}</td>
+                        <td>{{ record['instructions'] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5">No prescription records yet</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!--Appointments Section-->
+<section id="appointments" class="section-padding">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title">Your Appointments</h2>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Token</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment['id'] }}</td>
+                        <td>{{ appointment['patient_name'] }}</td>
+                        <td>{{ appointment['age'] }}</td>
+                        <td>{{ appointment['date'] }}</td>
+                        <td>{{ appointment['time'] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5">No Appointments scheduled yet</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll(".nav-link")
+        navLinks.forEach(link => {
+            link.style.display = 'none';
+        })
+
+        const currentDate = document.getElementById('currentDate');
+        currentDate.textContent = new Date().toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    })
+
+</script>
+
+{% endblock %}

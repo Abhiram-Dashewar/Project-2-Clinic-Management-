@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!--Hero Section  -->
+<section class="hero">
+    <div class="container">
+        <h2>Welcome to Your Clinic Management Solution</h2>
+        <p>A simple, efficient system to manage patient registration, consultations, prescriptions, and billing - all in
+            one place.</p>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-user-injured"></i>
+                <span>Patient Management</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-stethoscope"></i>
+                <span>Doctor Consultations</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-file-prescription"></i>
+                <span>Digital Prescriptions</span>
+            </div>
+            <div class="feature">
+                <i class="fas fa-receipt"></i>
+                <span>Easy Billing</span>
+            </div>
+        </div>
+
+        <div class="role-cards">
+            <div class="card" id="receptionist-card">
+                <i class="fas fa-user-tie"></i>
+                <h3>Receptionist</h3>
+                <p>Register patients, generate tokens, manage queue, and create bills.</p>
+                <button class="btn">Login as Receptionist</button>
+            </div>
+
+            <div class="card" id="doctor-card">
+                <i class="fas fa-user-md"></i>
+                <h3>Doctor</h3>
+                <p>View patient details, write prescriptions, and track visit history.</p>
+                <button class="btn">Login as Doctor</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="feaTures" id="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>System Features</h2>
+            <p>Our Clinic Management System offers a range of features designed to streamline healthcare operations.</p>
+        </div>
+        <div class="featuresGrid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>Doctor Login</h3>
+                <p>Doctors can access ths system to examine patient details, view assigned tokens, and provide
+                    prescriptions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>Receptionist Login</h3>
+                <p>Receptionists can assign tokens, manage patient information, and handle billing operations.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <h3>Token Generation</h3>
+                <p>Automatic token generation for new patients with sequential numbering and priority management.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-notes-medical"></i>
+                </div>
+                <h3>Patient Information</h3>
+                <p>Comprehensive patient records with personal details, medical history, and prescription data.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <h3>Billing & Invoicing</h3>
+                <p>Automated billing system that generates invoices based on services and treatments provided.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Patient History</h3>
+                <p>Secure storage and easy retrieval of patient history for doctors and receptionists.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Problem Statement-->
+<section class="problem-statement" id="problem">
+    <div class="container">
+        <div class="problem-content">
+            <h2>Problem Statement</h2>
+            <p>The Clinic Management System is designed to facilitate communication between doctors and receptionists,
+                streamlining clinic operations and patient management.</p>
+            <p>The system supports two primary users: doctors and receptionists. Receptionists are responsible for
+                assigning tokens to clinic visitors and storing their personal information in the database. Doctors
+                receive these tokens along with patient details for examination.</p>
+            <p>After examining patients, doctors input prescribed treatments into the system, which are then directed to
+                the receptionist for further action. The system maintains comprehensive patient history, allowing both
+                doctors and receptionists to access records at any time.</p>
+            <p>This solution significantly reduces complexity in maintaining individual patient records and improves
+                overall clinic efficiency.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Technologies -->
+<section class="technologies" id="techonologies">
+    <div class="container">
+        <div class="section-title">
+            <h2>Technologies Used</h2>
+            <p>Our system is built with modern, reliable technologies to ensure performance and security</p>
+        </div>
+        <div class="tech-icons">
+            <div class="tech-icon">
+                <i class="fab fa-html5"></i>
+                <span>HTML5</span>
+            </div>
+            <div class="tech-icon">
+                <i class="fab fa-css3-alt"></i>
+                <span>CSS3</span>
+            </div>
+            <div class="tech-icon">
+                <i class="fab fa-js-square"></i>
+                <span>JavaScript</span>
+            </div>
+            <div class="tech-icon">
+                <i class="fab fa-python"></i>
+                <span>Python</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Receptionist Login Modal -->
+<div class="modal" id="receptionist-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-user-tie"></i>  Receptionist Login</h3>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form action="{{url_for('login')}}" method="POST" id="receptionist-login-form">
+                <input type="hidden" name="role" value="receptionist">
+                <div class="form-group">
+                    <label for="receptionist-username">Username</label>
+                    <input type="text" id="receptionist-username" class="form-control" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="receptionist-password">Password</label>
+                    <input type="password" id="receptionist-password" class="form-control" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+
+            <div class="demo-credentials">
+                <h4>Demo Credentials</h4>
+                <p><strong>Username:</strong> reception</p>
+                <p><strong>Password:</strong> clinic123</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Doctor Login Modal -->
+<div class="modal" id="doctor-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-user-md"></i>  Doctor Login</h3>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="doctor-login-form" action="{{url_for('login')}}" method="POST">
+                <input type="hidden" name="role" value="doctor">
+                <div class="form-group">
+                    <label for="doctor-username">Username</label>
+                    <input type="text" id="doctor-username" class="form-control" name="username" placeholder="Enter your username"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="doctor-password">Password</label>
+                    <input type="password" id="doctor-password" class="form-control" name="password" placeholder="Enter your password"
+                        required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+
+            <div class="demo-credentials">
+                <h4>Demo Credentials</h4>
+                <p><strong>Username:</strong> doctor</p>
+                <p><strong>Password:</strong> clinic123</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const receptionistCard = document.getElementById('receptionist-card');
+        const doctorCard = document.getElementById('doctor-card');
+        const receptionistModal = document.getElementById('receptionist-modal');
+        const doctorModal = document.getElementById('doctor-modal');
+        const closeButtons = document.querySelectorAll('.close');
+        const receptionistForm = document.getElementById('receptionist-login-form');
+        const doctorForm = document.getElementById('doctor-login-form');
+
+        // Open modals when cards are clicked
+        receptionistCard.addEventListener('click', () => {
+            receptionistModal.style.display = 'flex';
+        });
+
+        doctorCard.addEventListener('click', () => {
+            doctorModal.style.display = 'flex';
+        });
+
+        // Close modals when close button is clicked
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                receptionistModal.style.display = 'none';
+                doctorModal.style.display = 'none';
+            });
+        });
+
+        // Close modals when clicking outside the modal content
+        window.addEventListener('click', (event) => {
+            if (event.target === receptionistModal) {
+                receptionistModal.style.display = 'none';
+            }
+            if (event.target === doctorModal) {
+                doctorModal.style.display = 'none';
+            }
+        });
+    })
+
+</script>
+
+
+
+{% endblock %}
