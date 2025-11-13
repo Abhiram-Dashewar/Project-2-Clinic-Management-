@@ -39,6 +39,9 @@ This project demonstrates the use of Flask as a backend framework and database i
 | **Server** | Flask built-in development server |
 | **Version Control** | Git & GitHub |
 
+### Live Site
+- [Clinic Management System](https://project-2-clinic-management.onrender.com/)
+
 ---
 
 ## ⚙️ Installation & Setup
@@ -47,5 +50,6 @@ Follow these steps to run the project locally:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/Clinic-Management-System.git
-   cd Clinic-Management-System
+   git clone https://github.com/Abhiram-Dashewar/Project-2-Clinic-Management-.git
+   cd Project-2-Clinic-MAnagement-
+   python app.py
