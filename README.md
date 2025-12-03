@@ -51,5 +51,5 @@ Follow these steps to run the project locally:
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Abhiram-Dashewar/Project-2-Clinic-Management-.git
-   cd Project-2-Clinic-MAnagement-
+   cd Project-2-Clinic-Management-
    python app.py
